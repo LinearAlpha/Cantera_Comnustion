@@ -1,7 +1,7 @@
 function combustion(gas1, gas2)
     
     load('data');
-    sprintf("%s\n", 'Data for combustion has been loaded')
+    fprintf('%s\n', 'Data for combustion has been loaded')
     for i = 1:imax
         phi1(i) = Rrange(i);
         x1 = zeros(nsp1, 1);
@@ -26,4 +26,4 @@ function combustion(gas1, gas2)
     end
 
     save ('data_combustion');
-    sprintf("%s\n", 'combustion calculation and saving is completed')
+    fprintf('%s\n', 'combustion calculation and saving is completed')

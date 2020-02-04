@@ -1,7 +1,7 @@
 function flame(gas1, gas2)
    
     load('data');
-    sprintf("%s\n", 'Data for flame has been loaded')
+    fprintf('%s\n', 'Data for flame has been loaded')
 
     for i = 1:imax
         phi1(i) = Rrange(i);
@@ -25,4 +25,4 @@ function flame(gas1, gas2)
     end
 
     save('data_flame');
-    sprintf("%s\n", 'Flame calculation and saving is completed')
+    fprintf('%s\n', 'Flame calculation and saving is completed')

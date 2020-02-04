@@ -14,9 +14,9 @@ clear up
 close all
 clc
 
-sprintf("%s\n", 'ME 5446: Ptoject 1')
-sprintf("%s\n", 'Author: Min Kim')
-sprintf("%s %s %s\n", 'This program is using Cantera`s', ...
+fprintf('%s\n', 'ME 5446: Ptoject 1')
+fprintf('%s\n', 'Author: Min Kim')
+fprintf('%s %s %s\n', 'This program is using Cantera`s', ...
         'functrions that before run this program please install', ...
         'Cantera.')
 
@@ -44,7 +44,7 @@ Rrange = ([0.4:0.01:2.6]); % Ratio range
 imax = numel(Rrange); % number of setp
 
 save('data');
-sprintf("%s\n", 'Inisial setting and saving is complete')
+fprintf('%s\n', 'Inisial setting and saving is complete')
 
 flame(gas1, gas2);
 GraohDisp(1);
