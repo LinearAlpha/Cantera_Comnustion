@@ -1,0 +1,11 @@
+gas1 = GRI30
+setTemperature(gas1, 1200);
+set(gas1, 'Temperature', 900.0, 'Pressure', 1.e5);
+set(gas1, 'Temperature', 900.0, 'Pressure', 1.e5, 'MoleFractions',...
+                                   'CH4:1,O2:2,N2:7.52');
+set(gas1,'T',900.0,'P',1.e5,'X','CH4:1,O2:2,N2:7.52')
+set(gas1, 'Enthalpy', 2*enthalpy_mass(gas1), 'Pressure', 2*oneatm);
+x = ones(53,1);   % a column vector of 53 ones
+set(gas1, 'X', x)
+gas2 = Solution('diamond.cti', 'gas');        % a gas
+diamond = Solution('diamond.cti','diamond');  % bulk diamond
