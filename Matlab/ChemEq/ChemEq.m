@@ -1,12 +1,12 @@
-%*******************************************************************************
-% Project: Equilibrium Combustion Product Project 
-% File: ChemEq.m 
+1%*******************************************************************************
+% Project: Equilibrium Combustion Product Project
+% File: ChemEq.m
 % Authors: Minpyo Kim
 % Date: 02/03/2020
 % Description: This script is calculating two different scenario of combustion
 %              The first scenario  is Propane and Air mixture
 %              The second scenario is Methane and Oxygen mixture
-% Bofore  use it: Please install Cantera from 
+% Bofore  use it: Please install Cantera from
 %                 https://cantera.org/install/index.html
 %*******************************************************************************
 clear all
@@ -17,36 +17,57 @@ clc
 fprintf('%s\n', 'ME 5446: Ptoject 1')
 fprintf('%s\n', 'Author: Min Kim')
 fprintf('%s %s %s\n', 'This program is using Cantera`s', ...
-        'functrions that before run this program please install', ...
-        'Cantera.')
+    'functrions that before run this program please install', ...
+    'Cantera.')
 
 % Recalling mashing
-g = GRI30;
-gas1 = g;
-gas2 = g;
+g = IdealGasMix('gri30.cti');
+phi = [0.4:0.01:2.5];
 
-% setting reactant air and propane
-ic3h8 = speciesIndex(gas1, 'C3H8');
-io2 = speciesIndex(gas1, 'O2');
-in2 = speciesIndex(gas1, 'N2');
+atm1 = 101325.0;
+atm50 = 101325.0 * 50;
+atm100 = 101325.0 * 100;
 
-% setting reactant Oxygen and mathane
-ich4 = speciesIndex(gas2, 'CH4');
-io2 = speciesIndex(gas2, 'O2');
+temp1 = 298;
+temp2 = 298 * 50;
+temp3 = 298 * 100;
 
-nsp1 = nSpecies(gas1); %numver of spsices
-nsp2 = nSpecies(gas2);
+% This is calc for flame C3H8 + air
+[temp_1atm, molFF_1atm, gasF_1atm] = flame(g, phi, atm1, 1);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasF_1atm()
+[temp_50atm, molFF_50atm, gasF_50atm] = flame(g, phi, atm50, 1);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasF_50atm()
+[temp_100atm, molFF_100atm, gasF_100atm] = flame(g, phi, atm100, 1);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasF_100atm()
 
-phi1 = []; % Equivalence Ratio of Propane and Air mixture
-phi2 = []; % Equivalence Ratio of Methane and Oxygen mixture
+% This is calc for flame CH3 + O2
+[tempF_2, molFF, gasF2] = flame(g, phi, atm1, 2);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasF2()
 
-Rrange = ([0.4:0.01:2.6]); % Ratio range
-imax = numel(Rrange); % number of setp
+% This is calc for combustion C3H8 + air
+[pres_T1, molFC_T1, gasC_T1] = combustion(g, phi, temp1, 1);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasC_T1()
+[pres_T2, molFC_T2, gasC_T2] = combustion(g, phi, temp2, 1);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasC_T2()
+[pres_T3, molFC_T3, gasC_T3] = combustion(g, phi, temp3, 1);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasC_T3()
+
+% This is calc for combustion CH4 + O2
+[pres_T, molFC_T, gasC2_T] = combustion(g, phi, temp1, 2);
+fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
+gasC2_T()
+
+% Clearing initial gas object
+clear g
 
 save('data');
-fprintf('%s\n', 'Inisial setting and saving is complete')
 
-flame(gas1, gas2);
 GraohDisp(1);
-combustion(gas1, gas2);
-GraohDisp(2);
+

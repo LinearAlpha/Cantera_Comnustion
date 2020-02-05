@@ -1,46 +1,21 @@
 function GraohDisp (x)
+    load('data')
 
     if x == 1
-        load('data_flame');
 
         figure('name', 'Propane and Air Mixture Adiabatic Flame',...
                 'NumberTitle', 'off');
-        subplot(1, 2, 1);
-
-        plot(phi1, tad1);
-        grid on
-        xlim([0.4 2.5]);
-
-        xlabel('Equivalence Ratio');
-        ylabel('Temperature (K)');
-        title({'Propane and Air Mixture Adiabatic Flame: C3H6 + O2 + N2 ', ...
-            '(Temperature (K) VS Ration)'});
-        subplot(1, 2, 2);
-        plot(phi2, tad2);
-        grid on
-        xlim([0.4 2.5]);
-
-        xlabel('Equivalence Ratio');
-        ylabel('Temperature (K)');
-        title({'Methane and Oxygen Mixture Adiabatic Flame: CH4 + O2', ...
-            '(Temperature (K) VS Ration)'});
-    
-        figure('name', 'Adiabatic Flame Comparetion', ...
-                'NumberTitle', 'off');
         hold on
-        plot(phi1, tad1, 'r');
-        plot(phi2, tad2, 'b');
+        plot(phi, tempF_2, 'r');
+        plot(phi, temp_1atm, 'b');
+        plot(phi, temp_50atm, 'g');
+        plot(phi, temp_100atm, 'k');
         grid on
         xlim([0.4 2.5]);
-        xlabel('Equivalence Ratio');
-        ylabel('Temperature (K)');
-        title({'Adiabatic Flame Temperature Comparetion', ...
-             '(Temperature (K) VS Ration)'});
-        legend('C3H6 + O2 + N2', 'CH4 + O2');
+        legend('CH4 + O2', 'C3H8 + O2 + N2 1atm', 'C3H8 + O2 + N2 50atm' , 'C3H8 + O2 + N2 100atm');
         hold off
-    
+        
     elseif x == 2
-        load('data_combustion');
         figure('name', 'Propane and Air Mixture Adiabatic Combustion',...
         'NumberTitle', 'off');
         subplot(1, 2, 1);
