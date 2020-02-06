@@ -1,4 +1,4 @@
-1%*******************************************************************************
+%*******************************************************************************
 % Project: Equilibrium Combustion Product Project
 % File: ChemEq.m
 % Authors: Minpyo Kim
@@ -22,15 +22,15 @@ fprintf('%s %s %s\n', 'This program is using Cantera`s', ...
 
 % Recalling mashing
 g = IdealGasMix('gri30.cti');
-phi = [0.4:0.01:2.5];
+phi = (0.4:0.01:2.5);
 
 atm1 = 101325.0;
 atm50 = 101325.0 * 50;
 atm100 = 101325.0 * 100;
 
-temp1 = 298;
-temp2 = 298 * 50;
-temp3 = 298 * 100;
+temp1 = 810.15; % ignition temperture of methane 537 C
+temp2 = 910.15; % 437 C
+temp3 = 1010.15; % 537 C 
 
 % This is calc for flame C3H8 + air
 [temp_1atm, molFF_1atm, gasF_1atm] = flame(g, phi, atm1, 1);
@@ -65,9 +65,9 @@ fprintf('%s\n', 'C3H8 + aire flame temp at 1 atm complete')
 gasC2_T()
 
 % Clearing initial gas object
-clear g
+clear g atm1 atm50 atm100 temp1 temp2 temp3
 
 save('data');
 
-GraohDisp(1);
+GraohDisp();
 
