@@ -1,78 +1,46 @@
-function GraohDisp (x)
+function GraohDisp()
 
-    if x == 1
-        load('data_flame');
+    load('data')
 
-        figure('name', 'Propane and Air Mixture Adiabatic Flame',...
-                'NumberTitle', 'off');
-        subplot(1, 2, 1);
+    figure('name', 'Adiabatic Flame Temperture', 'NumberTitle', 'off');
+    hold on
+    grid on
+    plot(phi, tempF_2, 'r');
+    plot(phi, temp_1atm, 'b');
+    plot(phi, temp_50atm, 'g');
+    plot(phi, temp_100atm, 'k');
+    xlim([0.4 2.5]);
+    legend('CH4 + O2', 'C3H8 + O2 + N2 1atm', 'C3H8 + O2 + N2 50atm', 'C3H8 + O2 + N2 100atm');
+    xlabel('Equivalence Ratio');
+    ylabel('Temperture (K)');
+    title({'Propane and Air Mixture Adiabatic Flame Compare', 'Temperture (K) VS Ration'});
+    hold off
 
-        plot(phi1, tad1);
-        grid on
-        xlim([0.4 2.5]);
+    figure('name', 'Propane and Air Mixture Adiabatic Flame', 'NumberTitle', 'off');
+    hold on
+    grid on
+    plot(phi, temp_1atm, 'b');
+    plot(phi, temp_50atm, 'g');
+    plot(phi, temp_100atm, 'k');
+    xlim([0.4 2.5]);
+    legend('1atm', '50atm', '100atm');
+    xlabel('Equivalence Ratio');
+    ylabel('Temperture (K)');
+    title({['Propane and Air Mixture Adiabatic Flame: ', 'C3H6 + O2 + N2 Only'], 'Temperture (K) VS Ration'});
+    hold off
 
-        xlabel('Equivalence Ratio');
-        ylabel('Temperature (K)');
-        title({'Propane and Air Mixture Adiabatic Flame: C3H6 + O2 + N2 ', ...
-            '(Temperature (K) VS Ration)'});
-        subplot(1, 2, 2);
-        plot(phi2, tad2);
-        grid on
-        xlim([0.4 2.5]);
+    figure('name', 'Adiabatic Combustion Temperture', 'NumberTitle', 'off');
+    hold on
+    grid on
+    plot(phi, pres_T, 'r');
+    plot(phi, pres_T1, 'b');
+    plot(phi, pres_T2, 'g');
+    plot(phi, pres_T3, 'k');
+    xlim([0.4 2.5]);
+    legend('CH4 + O2', 'C3H8 + O2 + N2 298K', 'C3H8 + O2 + N2 1490k', 'C3H8 + O2 + N2 2980K');
+    xlabel('Equivalence Ratio');
+    ylabel('Pressure (Pa)');
+    title({'Propane and Air Mixture Adiabatic Combustion Compare', 'Pressure (Pa) VS Ration'});
+    hold off
 
-        xlabel('Equivalence Ratio');
-        ylabel('Temperature (K)');
-        title({'Methane and Oxygen Mixture Adiabatic Flame: CH4 + O2', ...
-            '(Temperature (K) VS Ration)'});
-    
-        figure('name', 'Adiabatic Flame Comparetion', ...
-                'NumberTitle', 'off');
-        hold on
-        plot(phi1, tad1, 'r');
-        plot(phi2, tad2, 'b');
-        grid on
-        xlim([0.4 2.5]);
-        xlabel('Equivalence Ratio');
-        ylabel('Temperature (K)');
-        title({'Adiabatic Flame Temperature Comparetion', ...
-             '(Temperature (K) VS Ration)'});
-        legend('C3H6 + O2 + N2', 'CH4 + O2');
-        hold off
-    
-    elseif x == 2
-        load('data_combustion');
-        figure('name', 'Propane and Air Mixture Adiabatic Combustion',...
-        'NumberTitle', 'off');
-        subplot(1, 2, 1);
-        plot(phi1, pres1);
-        grid on
-        xlim([0.4 2.5]);
-        xlabel('Equivalence Ratio');
-        ylabel('Pressure (Pa)');
-        title({['Propane and Air Mixture Adiabatic Combustion: ', ...
-                'C3H6 + O2 + N2'], '(Pressure (Pa) VS Ration)'});
-        subplot(1, 2, 2)
-        plot(phi2, pres2);
-        grid on
-        xlim([0.4 2.5]);
-        xlabel('Equivalence Ratio');
-        ylabel('Pressure (Pa)');
-        title({'Methane and Oxygen Mixture Adiabatic Combustion: CH4 + O2', ...
-            '(Pressure (Pa) VS Ration)'});
-    
-        figure ('name', 'Adiabatic Combustion Comparetion', ...
-                'NumberTitle', 'off');
-        hold on
-        plot(phi1, pres1, 'r');
-        plot(phi2, pres2, 'b');
-        grid on
-        xlim([0.4 2.5]);
-        xlabel('Equivalence Ratio');
-        ylabel('Pressure (Pa)');
-        title({'Adiabatic Combustion Comparetion',...
-             '(Pressure (Pa) VS Ration)'});
-        legend('C3H6 + O2 + N2', 'CH4 + O2');
-        
-    else
-        disp('um.... how you got into this menu without editiing lol')
-    end
+end

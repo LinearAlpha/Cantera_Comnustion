@@ -1,28 +1,45 @@
-function flame(gas1, gas2)
-   
-    load('data');
-    fprintf('%s\n', 'Data for flame has been loaded')
+function [temp, molF, gas] = flame(gas, phi, inipres, num)
 
-    for i = 1:imax
-        phi1(i) = Rrange(i);
-        x1 = zeros(nsp1, 1);
-        x1(ic3h8, 1) = phi1(i);
-        x1(io2, 1) = 2.0;
-        x1(in2, 1) = 7.52;
-        set(gas1, 'T', 298, 'P', oneatm, 'MoleFractions', x1);
-        equilibrate(gas1, 'HP');
-        tad1(i) = temperature(gas1);
-        % xeq1(:, i) = moleFractions(gas1);
+    nsp = nSpecies(gas);
+    imax = size(phi, 2);
+    rO2 = 2;
+    rN2 = 7.52;
+    temp = zeros(1, imax);
 
-        phi2(i) = Rrange(i);
-        x2 = zeros(nsp2,1);
-        x2(ich4,1) = phi2(i);
-        x2(io2,1) = 2.0;
-        set(gas2,'T',298.0,'P',oneatm,'MoleFractions', x2);
-        equilibrate(gas2,'HP');
-        tad2(i) = temperature(gas2);
-        % xeq2(:,i) = moleFractions(gas2);
+    if num == 1
+        % find methane, nitrogen, and oxygen indices
+        ic3h8 = speciesIndex(gas, 'C3H8');
+        io2 = speciesIndex(gas, 'O2');
+        in2 = speciesIndex(gas, 'N2');
+
+        for i = 1:imax
+            x = zeros(nsp, 1);
+            x(ic3h8, 1) = phi(i);
+            x(io2, 1) = rO2;
+            x(in2, 1) = rN2;
+            set(gas, 'Temperature', 298, 'Pressure', inipres, 'MoleFractions', x);
+            equilibrate(gas, 'HP');
+            temp(i) = temperature(gas);
+            %pres(i) = pressure(gas);
+            molF(:, i) = moleFractions(gas);
+        end
+
+    elseif num == 2
+        % find methane, nitrogen, and oxygen indices
+        ich4 = speciesIndex(gas, 'CH4');
+        io2 = speciesIndex(gas, 'O2');
+
+        for i = 1:imax
+            x = zeros(nsp, 1);
+            x(ich4, 1) = phi(i);
+            x(io2, 1) = rO2;
+            set(gas, 'Temperature', 298.0, 'Pressure', inipres, 'MoleFractions', x);
+            equilibrate(gas, 'HP');
+            temp(i) = temperature(gas);
+            %pres(i) = pressure(gas);
+            molF(:, i) = moleFractions(gas);
+        end
+
     end
 
-    save('data_flame');
-    fprintf('%s\n', 'Flame calculation and saving is completed')
+end
