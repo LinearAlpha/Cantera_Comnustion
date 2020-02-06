@@ -4,6 +4,8 @@ function [pres, molF, gas] = combustion(gas, phi, iniTemp, num)
     imax = size(phi, 2);
     rO2 = 2;
     rN2 = 7.52;
+    pres = zeros(1, imax);
+    molF = zeros(53, imax);
 
     if num == 1
         % find methane, nitrogen, and oxygen indices

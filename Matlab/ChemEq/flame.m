@@ -5,6 +5,7 @@ function [temp, molF, gas] = flame(gas, phi, inipres, num)
     rO2 = 2;
     rN2 = 7.52;
     temp = zeros(1, imax);
+    molF = zeros(53, imax);
 
     if num == 1
         % find methane, nitrogen, and oxygen indices
