@@ -4,8 +4,8 @@ function [temp, molF, gas] = flame(gas, phi, inipres, num)
     imax = size(phi, 2);
     rO2 = 2;
     rN2 = 7.52;
+    initemp = 493.333;
     temp = zeros(1, imax);
-    molF = zeros(53, imax);
 
     if num == 1
         % find methane, nitrogen, and oxygen indices
@@ -18,7 +18,7 @@ function [temp, molF, gas] = flame(gas, phi, inipres, num)
             x(ic3h8, 1) = phi(i);
             x(io2, 1) = rO2;
             x(in2, 1) = rN2;
-            set(gas, 'Temperature', 298, 'Pressure', inipres, 'MoleFractions', x);
+            set(gas, 'Temperature', initemp, 'Pressure', inipres, 'MoleFractions', x);
             equilibrate(gas, 'HP');
             temp(i) = temperature(gas);
             %pres(i) = pressure(gas);
@@ -34,7 +34,7 @@ function [temp, molF, gas] = flame(gas, phi, inipres, num)
             x = zeros(nsp, 1);
             x(ich4, 1) = phi(i);
             x(io2, 1) = rO2;
-            set(gas, 'Temperature', 298.0, 'Pressure', inipres, 'MoleFractions', x);
+            set(gas, 'Temperature', initemp, 'Pressure', inipres, 'MoleFractions', x);
             equilibrate(gas, 'HP');
             temp(i) = temperature(gas);
             %pres(i) = pressure(gas);
