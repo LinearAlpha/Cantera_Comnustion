@@ -1,3 +1,11 @@
+%{
+Project: Equilibrium Combustion Product Project
+Function: flame.m
+Authors: Minpyo Kim
+Description: This function calcuates ad
+%}
+
+
 function [temp, molF, gas] = flame(gas, phi, inipres, num)
 
     nsp = nSpecies(gas);
